@@ -82,7 +82,7 @@ router.post('/login', async (req, res, next) => {
       console.log('user ---->', user)
       return res.json({ message: `You are logged in ${username}, have a cookie!` })
     }
-    next({ status: 401, message: 'Invalid Credentials from login' }); // Sometimes this needs a return in front of it.
+    next({ status: 401, message: 'Invalid Credentials from login' });
   } catch (err) {
     res.status(500).json({ message: 'Error registering user', err });
   }
@@ -112,6 +112,22 @@ router.post('/login', async (req, res, next) => {
     "message": "no session"
   }
  */
+
+
+router.get('/logout', async (req, res, next) => {
+  try {
+    if (req.session.user) {
+      req.session.destroy(() => {                            // This is the session.destroy() method.
+        res.status(200).json({ message: 'Logged Out' })
+      })
+    }
+    next({ status: 401, message: 'Not logged in' })
+  } catch (err) {
+    res.status(500).json({ message: 'Error registering user', err });
+  }
+})
+
+
 
 
 module.exports = router;
