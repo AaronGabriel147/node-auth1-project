@@ -15,21 +15,44 @@ const cors = require("cors");
   or you can use a session store like `connect-session-knex`.
  */
 
+const authRouter = require('./auth/auth-router')
+const usersRouter = require("./users/users-router");
+
 const server = express();
 
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
+server.use('/api/users', usersRouter)
+server.use('/api/auth', authRouter)
+
+
+
+
+// Connected //  localhost:9000/  
 server.get("/", (req, res) => {
   res.json({ api: "up" });
 });
 
+
+
+server.use('*', (req, res, next) => {
+  console.log('this route does not exist')
+  next({
+    status: 404,
+    message: 'not the route you are looking for',
+  })
+})
+
 server.use((err, req, res, next) => { // eslint-disable-line
+  // eslint-disable-line
+  console.log(err.status, 'ERROR STATUS')
   res.status(err.status || 500).json({
+    error: 'This is the error catch all',
     message: err.message,
     stack: err.stack,
-  });
-});
+  })
+})
 
 module.exports = server;

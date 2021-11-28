@@ -1,6 +1,10 @@
+const router = require('express').Router();
+const bcrypt = require('bcryptjs');
+const Users = require('../users/users-model');
+
+// THings that need to exist:
 // Require `checkUsernameFree`, `checkUsernameExists` and `checkPasswordLength`
 // middleware functions from `auth-middleware.js`. You will need them here!
-
 
 /**
   1 [POST] /api/auth/register { "username": "sue", "password": "1234" }
@@ -25,6 +29,38 @@
   }
  */
 
+router.post('/register', async (req, res) => { //  no next
+
+  const { username, password } = req.body;       // Take whatever the user types
+  const hash = bcrypt.hashSync(password, 8);     // Encrypts the user's password
+  const user = { username, password: hash }      // Create a user object with the username and hashed password
+
+  try {
+    const createdUser = await Users.add(user)  // add is a function in users-model.js ~~~ Knex = db('users').insert(user)
+    console.log(createdUser)
+    res.status(201).json(createdUser)          // 201 / json = Created
+  } catch (err) {
+    res.status(500).json({ message: 'Error registering user', err });
+  }
+})
+
+
+
+
+// __________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+// __________________________________________________________________
+
+
 
 /**
   2 [POST] /api/auth/login { "username": "sue", "password": "1234" }
@@ -43,6 +79,12 @@
  */
 
 
+
+// __________________________________________________________________
+
+
+
+
 /**
   3 [GET] /api/auth/logout
 
@@ -59,5 +101,5 @@
   }
  */
 
- 
-// Don't forget to add the router to the `exports` object so it can be required in other modules
+
+module.exports = router;
