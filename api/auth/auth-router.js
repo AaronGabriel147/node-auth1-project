@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const Users = require('../users/users-model');
+const checkUsernameFree = require('./auth-middleware');
 
 // THings that need to exist:
 // Require `checkUsernameFree`, `checkUsernameExists` and `checkPasswordLength`
@@ -29,10 +30,10 @@ const Users = require('../users/users-model');
   }
  */
 
-router.post('/register', async (req, res) => { //  no next
+router.post('/register', checkUsernameFree, async (req, res) => { //  no next
 
   const { username, password } = req.body;       // Take whatever the user types
-  const hash = bcrypt.hashSync(password, 8);     // Encrypts the user's password
+  const hash = bcrypt.hashSync(password, 8);     // Hashes the user's password
   const user = { username, password: hash }      // Create a user object with the username and hashed password
 
   try {

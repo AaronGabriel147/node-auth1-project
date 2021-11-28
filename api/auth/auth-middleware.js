@@ -1,3 +1,5 @@
+const Users = require('../users/users-model');
+
 /*
   If the user does not have a session saved in the server
 
@@ -10,15 +12,9 @@ function restricted(req, res, next) {
   if (req.session.user) {
     next()
   } else {
-    next({ status: 401, message: 'Bad Credentials from restricted middleware' })
+    next({ status: 401, message: "You shall not pass!" })
   }
 }
-
-
-
-
-
-
 
 
 
@@ -31,9 +27,49 @@ function restricted(req, res, next) {
     "message": "Username taken"
   }
 */
-function checkUsernameFree() {
+function checkUsernameFree(req, res, next) {
+  const { username } = req.body;
 
+  Users.findBy({ username })
+    .then(user => {
+      if (user) {
+        next({ status: 422, message: "Username taken" })
+      } else {
+        next()
+      }
+    })
+    .catch(next)
 }
+
+
+
+// async function checkUsernameFree(req, res, next) {
+//   // console.log(req.body);
+//   try {
+//     const users = await Users.findBy({ username: req.body.username })
+//     if (!users.length) {
+//       next()
+//     } else {
+//       next({ status: 422, message: "Username taken" })
+//     }
+//   } catch (err) {
+//     res.status(500).json({ message: 'Error registering user', err });
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
   If the username in req.body does NOT exist in the database

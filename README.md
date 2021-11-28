@@ -1,4 +1,4 @@
-What I did:
+What I did in terminal:
 
 npm i express-session
 
@@ -32,7 +32,7 @@ Write the following user access functions inside `api/users/users-model.js`:
 
 Write the following auth middlewares inside `api/auth/auth-middleware.js`:
 
-- [ ] `restricted`
+- [x] `restricted`
 - [ ] `checkUsernameFree`
 - [ ] `checkPasswordLength`
 - [ ] `checkUsernameExists`
@@ -46,10 +46,11 @@ Authentication will be tracked using sessions and cookies. See `api/server.js` f
 
 Write the following endpoints. The first one belongs inside `api/users/users-router.js` and the rest inside `api/auth/auth-router.js`:
 
-- [ ] `[GET] /api/users`                // x need to add restricted
-- [ ] `[POST] /api/auth/register`
-- [ ] `[POST] /api/auth/login`
-- [ ] `[GET] /api/auth/logout`
+All endpoints connected and working, just need to add requirements stated in router files. 
+- [x] `[GET] /api/users`                
+- [z] `[POST] /api/auth/register`
+- [z] `[POST] /api/auth/login`
+- [z] `[GET] /api/auth/logout`
 
 
 
@@ -68,17 +69,8 @@ The database `auth.db3` includes a single `users` table:
 
 
 #### Notes
-
 - Run tests locally executing `npm test`.
 - The project comes with `migrate`, `rollback` and `seed` scripts in case you need to reset the database.
-- You are welcome to create additional files but **do not move or rename existing files** or folders.
-- Do not alter your `package.json` file except to install extra libraries or add extra scripts. Do not update existing libraries.
-- In your solution, it is essential that you follow best practices and produce clean and professional results.
-- Schedule time to review, refine, and assess your work.
-- Perform basic professional polishing including spell-checking and grammar-checking on your work.
-
-
-
 
 ### Task 3: Stretch Goals
 
