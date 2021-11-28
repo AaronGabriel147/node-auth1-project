@@ -1,4 +1,8 @@
-# Introduction to Authentication Module Project
+What I did:
+
+npm i express-session
+
+
 
 ## Introduction
 
@@ -21,6 +25,9 @@ Write the following user access functions inside `api/users/users-model.js`:
 - [ ] `findById`
 - [ ] `add`
 
+
+
+
 #### 2B - Middleware Functions
 
 Write the following auth middlewares inside `api/auth/auth-middleware.js`:
@@ -29,6 +36,9 @@ Write the following auth middlewares inside `api/auth/auth-middleware.js`:
 - [ ] `checkUsernameFree`
 - [ ] `checkPasswordLength`
 - [ ] `checkUsernameExists`
+
+
+
 
 #### 2C - Endpoints
 
@@ -41,6 +51,9 @@ Write the following endpoints. The first one belongs inside `api/users/users-rou
 - [ ] `[POST] /api/auth/login`
 - [ ] `[GET] /api/auth/logout`
 
+
+
+
 #### Users Schema
 
 The database `auth.db3` includes a single `users` table:
@@ -51,6 +64,9 @@ The database `auth.db3` includes a single `users` table:
 | username | string           | required, unique                              |
 | password | string           | required                                      |
 
+
+
+
 #### Notes
 
 - Run tests locally executing `npm test`.
@@ -60,6 +76,9 @@ The database `auth.db3` includes a single `users` table:
 - In your solution, it is essential that you follow best practices and produce clean and professional results.
 - Schedule time to review, refine, and assess your work.
 - Perform basic professional polishing including spell-checking and grammar-checking on your work.
+
+
+
 
 ### Task 3: Stretch Goals
 
