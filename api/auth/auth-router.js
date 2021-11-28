@@ -47,18 +47,11 @@ router.post('/register', async (req, res) => { //  no next
 
 
 
-// __________________________________________________________________
-
-
-
-
-
-
-
-
 
 
 // __________________________________________________________________
+
+
 
 
 
@@ -77,6 +70,25 @@ router.post('/register', async (req, res) => { //  no next
     "message": "Invalid credentials"
   }
  */
+
+
+router.post('/login', async (req, res, next) => {
+  const { username, password } = req.body;
+  try {
+    const [user] = await Users.findBy({ username })            // This is the user from the database.
+    if (user && bcrypt.compareSync(password, user.password)) { // bcrypt line is testing the decrypted pw
+      console.log(req.session)                               // user is being retrieved from db with decrypted password
+      req.session.user = user // A cookie will be set on response. The session will be stored in the server. // In Insomnia click Headers to see set cookie.
+      console.log('user ---->', user)
+      return res.json({ message: `You are logged in ${username}, have a cookie!` })
+    }
+    next({ status: 401, message: 'Invalid Credentials from login' }); // Sometimes this needs a return in front of it.
+  } catch (err) {
+    res.status(500).json({ message: 'Error registering user', err });
+  }
+});
+
+
 
 
 

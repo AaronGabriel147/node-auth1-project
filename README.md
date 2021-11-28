@@ -46,7 +46,7 @@ Authentication will be tracked using sessions and cookies. See `api/server.js` f
 
 Write the following endpoints. The first one belongs inside `api/users/users-router.js` and the rest inside `api/auth/auth-router.js`:
 
-- [ ] `[GET] /api/users`
+- [ ] `[GET] /api/users`                // x need to add restricted
 - [ ] `[POST] /api/auth/register`
 - [ ] `[POST] /api/auth/login`
 - [ ] `[GET] /api/auth/logout`

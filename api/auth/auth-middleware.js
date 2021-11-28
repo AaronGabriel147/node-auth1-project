@@ -7,12 +7,21 @@
   }
 */
 function restricted(req, res, next) {
-  // if (req.session.user) {
-  //   next()
-  // } else {
-  //   next({ status: 401, message: 'Bad Credentials from restricted middleware' })
-  // }
+  if (req.session.user) {
+    next()
+  } else {
+    next({ status: 401, message: 'Bad Credentials from restricted middleware' })
+  }
 }
+
+
+
+
+
+
+
+
+
 
 /*
   If the username in req.body already exists in the database

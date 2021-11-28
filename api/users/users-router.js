@@ -1,11 +1,11 @@
 const router = require("express").Router()
-// const { restricted } = require('../auth/auth-middleware')
+const { restricted } = require('../auth/auth-middleware')
 const Users = require('../users/users-model'); // find, findBy, findById, add
 
 
 
 // works. needs restricted middleware
-router.get("/", (req, res, next) => {
+router.get("/", restricted, (req, res, next) => {
   // console.log("req.user", req.user)
   Users.find()
     .then(users => {
